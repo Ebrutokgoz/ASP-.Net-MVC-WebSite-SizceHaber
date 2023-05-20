@@ -1,0 +1,56 @@
+﻿@model EntityLayer.Concrete.Writer
+
+<button class="btn btn-dark" data-toggle="modal" data-target="#Modal2">
+    Yeni Kullanıcı
+</button>
+
+<div class="modal" id="Modal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Yeni bir üye ekle</h4>
+            </div>
+
+            <div class="modal-body">
+                @using (Html.BeginForm("AddWriter", "Writer", FormMethod.Post))
+                {
+                <div class="form-group">
+                    @Html.Label("Ad")
+                    @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.WriterName)
+                    <br />
+                    @Html.Label("Soyad")
+                    @Html.TextBoxFor(x => x.WriterSurname, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.WriterSurname)
+                    <br />
+                    @Html.Label("E-mail")
+                    @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.WriterMail)
+                    <br />
+                    @Html.Label("Şifre")
+                    @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.WriterPassword)
+                    <br />
+                    @*@Html.Label("Yazar Görsel Linki")
+        @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterImage)*@
+                    <br />
+                    @Html.Label("Ünvan")
+                    @Html.DropDownListFor(x => x.WriterTitle, new List<SelectListItem> {
+                       new SelectListItem { Value = "Writer" , Text = "Kullanıcı" },
+                       new SelectListItem { Value = "Admin" , Text = "Admin" } },
+                    new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.WriterTitle)
+                                            <br />
+                                            @Html.Label("Hakkında")
+                                            @Html.TextAreaFor(x => x.WriterAbout, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.WriterAbout)
+                                            <br />
+                                            <button class="btn btn-info">Ekle</button>
+                                        </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

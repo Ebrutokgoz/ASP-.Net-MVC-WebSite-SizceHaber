@@ -1,0 +1,66 @@
+﻿@using EntityLayer.Concrete
+@model List<Admin>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{string adminRole = "Kısıtlı yetki";}
+<html>
+<head>
+    <style>
+        .padding-100 {
+            padding: 100px;
+            padding-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <section class="content padding-100">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Yetkilendirme İşlemleri</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Mail</th>
+                        <th>Yetki</th>
+                        @*<th>Durum</th>
+                        <th>Pasif Yap</th>*@
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if(item.AdminRole == "A")
+                        {
+                            adminRole = "Tam yetki";
+                        }
+                        <tr>
+                            <th>@item.AdminID</th>
+                            <td>@item.AdminUsername</td>
+                            <td>@adminRole</td>
+                            @*<td>Aktif</td>
+                            <td><a href="/Authorization/DeleteAdmin/@item.AdminID" class="btn btn-danger">Pasif Yap</a></td>*@
+                            <td><a href="/Authorization/EditAdmin/@item.AdminID" class="btn btn-warning">Yetkisini Değiştir</a></td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+
+        </div>
+        @Html.Action("AddAdmin", "Authorization")
+    </section>
+</body>
+</html>
+<br />
+
+

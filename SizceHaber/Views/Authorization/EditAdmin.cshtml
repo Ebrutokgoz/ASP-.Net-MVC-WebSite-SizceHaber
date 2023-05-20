@@ -1,0 +1,33 @@
+﻿@model EntityLayer.Concrete.Admin
+@{
+    ViewBag.Title = "EditAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section style="padding: 200px; padding-top: 10px;">
+    <h3>Admin bilgilerini düzenle</h3>
+    <br />
+
+    @using (Html.BeginForm("EditAdmin", "Authorization", FormMethod.Post))
+    {
+<div class="form-group">
+    @Html.Label("Admin ID:  ")
+    @Html.DisplayFor(x => x.AdminID, new { @class = "form-control" })
+    <br />
+    @Html.Label("Admin E-mail:  ")
+    @Html.DisplayFor(x => x.AdminUsername, new { @class = "form-control" })
+    @*<br />
+        @Html.Label("Şifre")
+        @Html.TextBoxFor(x => x.AdminPassword, new { @class = "form-control" })*@
+    <br />
+    @Html.Label("Rol")
+    @Html.DropDownListFor(x => x.AdminRole, new List<SelectListItem> {
+                   new SelectListItem { Value = "A" , Text = "Tam yetki" },
+                   new SelectListItem { Value = "B" , Text = "Kısıtlı yetki" } },
+                new { @class = "form-control" })
+    <br />
+    <button class="btn btn-dark">Güncelle</button>
+</div>
+    }
+
+</section>

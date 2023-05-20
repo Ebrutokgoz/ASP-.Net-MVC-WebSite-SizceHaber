@@ -1,0 +1,101 @@
+﻿@using EntityLayer.Concrete
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Content>
+@{
+    ViewBag.Title = "ContentByHeading";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+@{ int id = 1;}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .padding-50 {
+            padding: 100px;
+            padding-top: 0px;
+        }
+    </style>
+    <link rel="stylesheet" href="~/Content/PagedList.css">
+</head>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <section class="content padding-50">
+            <div class="container-fluid">
+
+                <!-- Timelime example  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="text-align:center!important;"><h2 style="color:orangered; font-weight:bold;">@ViewBag.headingName</h2> <p style="margin-inline-start: 5px !important; font-size: 15px;">@ViewBag.headingWriterInfo</p></div>
+                        <!-- The time line -->
+                        <div class="timeline">
+                            <!-- timeline time label -->
+                            @foreach (var item in Model)
+                            {
+                                if (item.ContentStatus == true)
+                                {
+                                    <div class="time-label">
+                                    </div>
+                                    <!-- /.timeline-label -->
+                                    <!-- timeline item -->
+                                    <div>
+                                        <i class="fas fa-comment bg-yellow"></i>
+                                        <div class="timeline-item">
+                                            <h3 class="timeline-header"> </h3>
+                                            <div class="timeline-body">
+                                                @item.ContentValue
+                                                <br />
+                                                <small>
+                                                    @item.Writer.WriterName @item.Writer.WriterSurname - @(((DateTime)item.ContentDate).ToString("dd.MM.yyyy"))
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                id = @item.HeadingID;
+
+
+
+                            }
+                            <div>
+                                <i class="fas fa-comment bg-yellow"></i>
+                                <div class="timeline-item">
+                                    <h3 class="timeline-header"> </h3>
+                                    <div class="timeline-body">
+                                        <form method="post" action="/WriterPanelContent/NewContent">
+                                            <div>
+
+                                                <input type="text" name="ContentValue" class="form-control" placeholder="Bence..." />
+                                                <br />
+                                                <input type="hidden" name="HeadingID" class="form-control" value="@id" />
+
+                                                <button class="btn btn-dark">Gönder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- END timeline item -->
+                        </div>
+                        <div class="d-flex justify-content-end" style="margin-right: 30px; "> @Html.PagedListPager((IPagedList)Model, k => Url.Action("ContentByHeading", new { k }))</div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+            <!-- /.timeline -->
+
+
+
+        </section>
+        <!-- /.content -->
+        <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+    <!-- ./wrapper -->
+</body>
+</html>
+

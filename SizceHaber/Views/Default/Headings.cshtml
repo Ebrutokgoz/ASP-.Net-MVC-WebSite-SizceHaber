@@ -1,0 +1,147 @@
+﻿@using EntityLayer.Concrete
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Heading>
+@{
+    Layout = null;
+}
+@{ string color = "";}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>AdminLTE 3 | Dashboard 3</title>
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Content/PagedList.css">
+    <style>
+        .title {
+            box-shadow: 0 0 0 #ccc;
+            transition: box-shadow .5s;
+            margin: 10px;
+        }
+
+            .title:hover {
+                box-shadow: 0 1rem 3rem rgb(128 128 128) !important;
+            }
+
+        .padding-50 {
+            padding: 100px;
+            padding-top: 0px;
+        }
+    </style>
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to to the body tag
+to get the desired effect
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Navbar -->
+        @Html.Action("Sidebar", "Default")
+        <!-- /.navbar -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper padding-50">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-left">
+                                <li class="breadcrumb-item "><a href="/Default/Headings" style="font-weight:bold;">Başlık</a></li>
+                                <li class="breadcrumb-item"><a href="/Default/ContentList" style="color:dimgray">İçerik</a></li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <div class="content">
+
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.CategoryID == 1)
+                        {
+                            color = "#99A3A4";
+                        }
+                        else if (item.CategoryID == 2)
+                        {
+                            color = "#CD6155 ";
+                        }
+                        else if (item.CategoryID == 3)
+                        {
+                            color = "#A569BD";
+                        }
+                        else if (item.CategoryID == 4)
+                        {
+                            color = "#5DADE2";
+                        }
+                        else
+                        {
+                            color = "#27AE60";
+                        }
+                        if (item.HeadingStatus)
+                        {
+                            <div class="col-lg-3 col-6 ">
+                                <!-- small box -->
+
+                                <div class="small-box title" style="background-color: @color;">
+                                    <div class="inner">
+
+                                        <h5>@item.HeadingName</h5>
+                                        <p>@item.Writer.WriterName @item.Writer.WriterSurname - @(((DateTime)item.HeadingDate).ToString("dd MMM yyyy"))</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+                                    <a href="/Default/HeadingList/@item.HeadingID" class="small-box-footer">Oku <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        }
+
+                    }
+
+                </div>
+                <div class="d-flex justify-content-end" style="margin-right: 30px; "> @Html.PagedListPager((IPagedList)Model, p => Url.Action("Headings", new { p }))</div>
+            </div>
+
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <!-- <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script> -->
+    <!-- Bootstrap -->
+    <script src="~/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="~/AdminLTE-3.0.4/dist/js/adminlte.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="~/AdminLTE-3.0.4/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
+    <script src="~/AdminLTE-3.0.4/dist/js/pages/dashboard3.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+﻿
+@using EntityLayer.Concrete
+@model List<Heading>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>AdminLTE 3 | Dashboard 3</title>
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .title {
+            box-shadow: 0 0 0 #ccc;
+            transition: box-shadow .5s;
+            margin: 10px;
+        }
+
+            .title:hover {
+                box-shadow: 0 1rem 3rem rgb(128 128 128) !important;
+            }
+    </style>
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to to the body tag
+to get the desired effect
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+
+<body class="hold-transition sidebar-mini layout-fixed" onload="rand_color()">
+    <div class="wrapper">
+        <!-- Navbar -->
+        @Html.Action("Sidebar", "Default")
+        <!-- /.navbar -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <br />
+            <div class="content">
+
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="col-lg-3 col-6 ">
+                            <!-- small box -->
+                            <div class="small-box title">
+                                <div class="inner">
+
+                                    <h5>@item.HeadingName</h5>
+                                    <p>@(((DateTime)item.HeadingDate).ToString("dd MMM yyyy"))</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-stats-bars"></i>
+                                </div>
+                                <a href="/Default/HeadingList/@item.HeadingID" class="small-box-footer">Oku <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <!-- <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script> -->
+    <!-- Bootstrap -->
+    <script src="~/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="~/AdminLTE-3.0.4/dist/js/adminlte.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="~/AdminLTE-3.0.4/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
+    <script src="~/AdminLTE-3.0.4/dist/js/pages/dashboard3.js"></script>
+    <script>
+            function rand_color() {
+                var colors = ['#800000', '	#FF6347', '#CD5C5C', '	#006400', '	#20B2AA', '	#6495ED', '	#8A2BE2', '#FF1493', '#F4A460', '	#00008B', '	#EE82EE'];
+
+                var arr = document.getElementsByClassName('title');
+                for (i = 0; i < arr.length; i++) {
+                    var random_color = colors[Math.floor(Math.random() * colors.length)];
+                    arr[i].style.background = random_color;
+                }
+            }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "SweetAlert";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<button id="btn1" class="btn btn-primary">Button 1</button>
+<button id="btn2" class="btn btn-warning">Button 2</button>
+<button id="btn3" class="btn btn-danger">Button 3</button>
+
+<script>
+    $('#btn1').click(function () {
+        swal("Hello World!");
+    });
+</script>
+
+<script>
+    $('#btn2').click(function () {
+        swal("Title", "Hello World!");
+    });
+</script>
+
+<script>
+    $('#btn3').click(function () {
+        swal("Title", "Hello World!", "success");
+    });
+</script>
+
+
+@*TempData veya ViewBag kullanabilirsiniz. Hatalı da 1. değer çalışır girişte 2. değer*@

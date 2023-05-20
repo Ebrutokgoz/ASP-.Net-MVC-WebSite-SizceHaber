@@ -1,0 +1,156 @@
+﻿@using EntityLayer.Concrete
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Content>
+@{
+    ViewBag.Title = "GetListByCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{ string contentStatus = "Pasif";}
+@{ string headingStatus = "Pasif";}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .padding-100 {
+            padding: 100px;
+            padding-top: 10px;
+        }
+
+        .custom-button {
+            margin: 2px;
+        }
+    </style>
+    <link rel="stylesheet" href="~/Content/PagedList.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+
+    <!-- Main content -->
+    <section class="content padding-100">
+        <div class="row">
+            @Html.Action("CategoryListMenu", "Content")
+            <div class="col-md-9">
+                <div class="container-fluid">
+
+                    <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">İçerik İşlemleri</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="card-body p-0">
+                            <table class="table projects">
+                                <thead>
+                                    <tr>
+
+                                        <th>
+                                            İçerik
+                                        </th>
+                                        <th class="text-center">
+                                            Oluşturan Yazar
+                                        </th>
+                                        <th class="text-center">
+                                            Kategori
+                                        </th>
+                                        <th class="text-center">
+                                            Durum
+                                        </th>
+                                        <th>
+                                            Başlık
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.ContentStatus)
+                                        {
+                                            contentStatus = "Aktif";
+                                        }
+                                        if (item.Heading.HeadingStatus)
+                                        {
+                                            headingStatus = "Aktif";
+                                        }
+                                    <tr>
+
+                                        <td>
+                                            <span>
+                                                @item.ContentValue
+                                            </span>
+                                            <br />
+                                            <small>
+                                                @(((DateTime)item.ContentDate).ToString("dd.MM.yyyy"))
+                                            </small>
+                                        </td>
+                                        <td class="text-center">
+                                            @item.Writer.WriterName @item.Writer.WriterSurname
+
+                                        </td>
+                                        <td class="text-center">
+                                            @item.Heading.Category.CategoryName
+                                        </td>
+                                        <td class="text-center">
+                                            @contentStatus
+
+                                        </td>
+                                        <td>
+                                            <small>
+                                                @headingStatus
+                                            </small>
+                                            <br />
+                                            <a href="/Content/ContentByHeading/@item.HeadingID" style="color:orangered; font-weight:bold;">
+                                                @item.Heading.HeadingName
+                                            </a>
+                                            <br />
+                                            <small>
+                                                @(((DateTime)item.Heading.HeadingDate).ToString("dd.MM.yyyy"))
+                                            </small>
+                                        </td>
+                                        <td class="project-actions text-right">
+
+                                            <a class="btn btn-outline-success btn-sm custom-button" href="/Content/EditContent/@item.ContentID">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Düzenle
+                                            </a>
+                                            <a class="btn btn-outline-danger btn-sm custom-button" href="/Content/DeleteContent/@item.ContentID">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Sil
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <div class="d-flex justify-content-end" style="margin-right: 30px; "> @Html.PagedListPager((IPagedList)Model, p => Url.Action("GetListByCategory", new { p }))</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+    <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+</body>
+</html>
+

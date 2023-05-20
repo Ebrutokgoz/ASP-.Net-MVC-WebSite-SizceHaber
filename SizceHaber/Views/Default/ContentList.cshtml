@@ -1,0 +1,139 @@
+﻿@using EntityLayer.Concrete
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Content>
+
+@{
+    Layout = null;
+}
+@{ string color = "";}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>AdminLTE 3 | Dashboard 3</title>
+    <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/PagedList.css">
+    <style>
+        .padding-50 {
+            padding: 100px;
+            padding-top: 0px;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        @Html.Action("Sidebar", "Default")
+
+        <div class="content-wrapper padding-50">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-left">
+                                <li class="breadcrumb-item "><a href="/Default/Headings" style="color:dimgray">Başlık</a></li>
+                                <li class="breadcrumb-item"><a href="/Default/ContentList" style="font-weight:bold;">İçerik</a></li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <div class="content">
+
+                <!-- Timelime example  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- The time line -->
+                        <div class="timeline">
+                            <!-- timeline time label -->
+                            @foreach (var item in Model)
+                            {
+                                if (item.Heading.CategoryID == 1)
+                                {
+                                    color = "#99A3A4";
+                                }
+                                else if (item.Heading.CategoryID == 2)
+                                {
+                                    color = "#CD6155 ";
+                                }
+                                else if (item.Heading.CategoryID == 3)
+                                {
+                                    color = "#A569BD";
+                                }
+                                else if (item.Heading.CategoryID == 4)
+                                {
+                                    color = "#5DADE2";
+                                }
+                                else
+                                {
+                                    color = "#27AE60";
+                                }
+                                <div class="time-label">
+                                    <span style="background-color:@color; width:10rem; text-align:center;"><a style="color:black;" href="/Default/ContentListByCategory/@item.Heading.CategoryID">@item.Heading.Category.CategoryName</a></span>
+                                </div>
+                                <!-- /.timeline-label -->
+                                <!-- timeline item -->
+                                <div>
+                                    <i class="fas fa-comment bg-yellow"></i>
+                                    <div class="timeline-item">
+                                        <h3 class="timeline-header">
+                                            <a href="/Default/HeadingList/@item.HeadingID" style="color:orangered;">@item.Heading.HeadingName </a>
+                                            <br />
+                                            <small>
+                                                @item.Heading.Writer.WriterName @item.Heading.Writer.WriterSurname - @(((DateTime)item.Heading.HeadingDate).ToString("dd.MM.yyyy"))
+                                            </small>
+                                        </h3>
+                                        <div class="timeline-body">
+                                            @item.ContentValue
+                                            <br />
+                                            <small>
+                                                @item.Writer.WriterName @item.Writer.WriterSurname - @(((DateTime)item.ContentDate).ToString("dd.MM.yyyy"))
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                            <!-- END timeline item -->
+                        </div>
+                        <div class="d-flex justify-content-end" style="margin-right: 30px; "> @Html.PagedListPager((IPagedList)Model, p => Url.Action("ContentList", new { p }))</div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+            <!-- /.timeline -->
+            <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <!-- <script src="~/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script> -->
+    <!-- Bootstrap -->
+    <script src="~/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="~/AdminLTE-3.0.4/dist/js/adminlte.js"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="~/AdminLTE-3.0.4/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/dist/js/demo.js"></script>
+    <script src="~/AdminLTE-3.0.4/dist/js/pages/dashboard3.js"></script>
+</body>
+</html>

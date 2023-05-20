@@ -1,0 +1,192 @@
+﻿@*@model EntityLayer.Concrete.Writer
+@{
+    ViewBag.Title = "EditWriter";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Yazar Düzenleme Sayfası</h2>
+
+@using (Html.BeginForm("EditWriter", "Writer", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Yazar ID")
+        @Html.TextAreaFor(x => x.WriterID, new { @class = "form-control" })
+        <br />
+        @Html.Label("Yazar Adı")
+        @Html.TextAreaFor(x => x.WriterName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterName)
+        <br />
+        @Html.Label("Yazar Soyadı")
+        @Html.TextAreaFor(x => x.WriterSurname, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterSurname)
+        <br />
+        @Html.Label("Yazar E-mail")
+        @Html.TextAreaFor(x => x.WriterMail, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterMail)
+        <br />
+        @Html.Label("Yazar Şifresi")
+        @Html.TextAreaFor(x => x.WriterPassword, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterPassword)
+        <br />
+        @Html.Label("Yazar Görsel Linki")
+        @Html.TextAreaFor(x => x.WriterImage, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterImage)
+        <br />
+        @Html.Label("Yazar Ünvanı")
+        @Html.TextAreaFor(x => x.WriterTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterTitle)
+        <br />
+        @Html.Label("Yazar Hakkında")
+        @Html.TextAreaFor(x => x.WriterAbout, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterAbout)
+        <br />
+        <button class="btn btn-success">Değişiklikleri Kaydet</button>
+    </div>
+}*@
+
+@model EntityLayer.Concrete.Writer
+@{
+    ViewBag.Title = "EditWriter";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .img-circle {
+            border-radius: 50%;
+        }
+
+        .user-image {
+            left: 50%;
+            margin-left: -60px;
+            position: absolute;
+            top: 230px;
+        }
+
+            .user-image > img {
+                border: 3px solid #ffffff;
+                height: auto;
+                width: 150px;
+            }
+
+        .user-header {
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+            height: 300px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .user-username {
+            font-size: 40px;
+            font-weight: 300;
+            margin-bottom: 0;
+            margin-top: 0;
+            margin-left: 5rem;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-info {
+            padding-top: 8rem;
+            padding-inline: 5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center">
+
+
+        <div class="col-md-9">
+
+            <!-- /.row -->
+            @using (Html.BeginForm("EditWriter", "Writer", FormMethod.Post))
+            {
+                <div class=" text-white user-header"
+                     style="background: url(' /AdminLTE-3.0.4/Login_v18/images/pcr3-8.jpg') no-repeat center center ;">
+                    <h1 class="text-left user-username">
+                        @Html.DisplayTextFor(x => x.WriterName) @Html.DisplayTextFor(x => x.WriterSurname)
+                    </h1>
+
+                </div>
+                <div class="user-image">
+                    <img class="img-circle" src="@Html.DisplayTextFor(x => x.WriterImage)" alt="User Avatar">
+
+                </div>
+                <div class="user-info">
+                    @Html.HiddenFor(x => x.WriterID)
+                    @Html.HiddenFor(x => x.WriterImage)
+                    @Html.HiddenFor(x => x.WriterTitle)
+                    @Html.HiddenFor(x => x.WriterStatus)
+                    <div class="form-group row">
+                        @Html.Label("ID", new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.DisplayFor(x => x.WriterID, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.WriterName)
+                    </div>
+                    <div class="form-group row">
+                        @Html.Label("Ad", new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.WriterName)
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.Label("Soyad", new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.WriterSurname, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.WriterSurname)
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.Label("E-mail Adresi", new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control", @type = "email" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.WriterMail)
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.Label("Şifre", new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control"})
+                        </div>
+                        @Html.ValidationMessageFor(x => x.WriterPassword)
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.Label("Hakkında", new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.WriterAbout, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.WriterAbout)
+                    </div>
+                    <div class="form-group row">
+                        @Html.Label("Unvan", new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.WriterTitle, new List<SelectListItem> {
+                      new SelectListItem { Value = "Writer" , Text = "Kullanıcı" },
+                      new SelectListItem { Value = "Admin" , Text = "Admin" } },
+                   new { @class = "form-control" })
+                        </div>
+                        
+                        @Html.ValidationMessageFor(x => x.WriterTitle)
+                        <br />
+                    </div>
+                    <br />
+                    <button class="btn btn-dark">Değişiklikleri Kaydet</button>
+
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+</html>
+

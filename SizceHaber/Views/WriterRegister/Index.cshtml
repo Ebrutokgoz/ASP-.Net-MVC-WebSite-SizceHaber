@@ -1,0 +1,114 @@
+﻿@model EntityLayer.Concrete.Writer
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>SİZCE Haber</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,400,400i,500,500i,700,700i,900" rel="stylesheet">
+    <link rel="stylesheet" href="~/AdminLTE-3.0.4/login-form-20/css/style.css">
+    <style>
+        .siteName {
+            font-size: 35px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #brand {
+            padding-left: 40px;
+            float: left;
+            width: 20%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="img js-fullheight" style="background-image: url(' /AdminLTE-3.0.4/Login_v18/images/pcr3.jpg');">
+    <div id="brand">
+
+        <a href="/Home/HomePage" class="d-flex align-content-center">
+            <img class="align-self-center" src="~/AdminLTE-3.0.4/Login_v18/images/letter-s.png" style="background-color: whitesmoke; border-radius:50%; width: 70px; height: 70px; padding:4px;">
+            <span class="text-light font-weight-bold align-self-center siteName" style="margin-left:10px!important;">SİZCE</span> <span class="brand-text font-weight-light text-light align-self-center siteName">&nbsp;Haber</span>
+        </a>
+
+
+
+    </div>
+
+    <section class="ftco-section">
+
+
+
+        <div class="container" style="padding-top:80px;">
+            <div class="row justify-content-center">
+                
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h3 class="mb-4 text-center">Hesabın yok mu?</h3>
+                        @using (Html.BeginForm("Index", "WriterRegister", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                <input type="text" name="WriterName" class="form-control" placeholder="Ad" required>
+                                @Html.ValidationMessageFor(x => x.WriterName)
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="WriterSurname" class="form-control" placeholder="Soyad" required>
+                                @Html.ValidationMessageFor(x => x.WriterSurname)
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="WriterMail" class="form-control" placeholder="E-mail adresi" required>
+                                @Html.ValidationMessageFor(x => x.WriterMail)
+                            </div>
+                            <div class="form-group">
+                                <input id="password-field" name="WriterPassword" type="password" class="form-control" placeholder="Şifre" required>
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                            <div class="form-group">
+                                <button id="loginBtn" type="submit" class="form-control  px-3" style="background-color:darkorange !important">Kayıt Ol</button>
+                            </div>
+                            <div class="text-center p-t-46 p-b-20">
+                                <span class="txt2">
+                                    <a href="/Login/Index" style="color: darkorange">Zaten bir hesabın var mı?</a>
+                                </span>
+                            </div>
+                        }
+                        @*<p class="w-100 text-center">&mdash; Diğer Giriş Seçenekleri &mdash;</p>
+        <div class="social d-flex text-center">
+            <a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
+            <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
+        </div>*@
+                        <div class="w-100 text-center mt-4 text">
+                            <a href="/Home/HomePage">Ana Sayfaya Dön</a>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/AdminLTE-3.0.4/login-form-20/js/jquery.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/login-form-20/js/popper.js"></script>
+    <script src="~/AdminLTE-3.0.4/login-form-20/js/bootstrap.min.js"></script>
+    <script src="~/AdminLTE-3.0.4/login-form-20/js/main.js"></script>
+
+</body>
+</html>
+
+
+

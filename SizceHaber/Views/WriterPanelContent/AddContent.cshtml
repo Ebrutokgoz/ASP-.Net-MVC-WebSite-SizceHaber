@@ -1,0 +1,47 @@
+﻿@*@model EntityLayer.Concrete.Content
+    @{
+        ViewBag.Title = "AddContent";
+        Layout = "~/Views/Shared/_WriterLayout.cshtml";
+    }
+
+    <h2>AddContent</h2>
+    <br />
+    @using (Html.BeginForm("AddContent", "WriterPanelContent", FormMethod.Post))
+    {
+        <div class="form-group">
+            <input type="hidden" name="HeadingID" value="@ViewBag.d"/>
+            @Html.Label("Bence ")
+            @Html.TextAreaFor(x => x.ContentValue,10,30, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.ContentValue)
+            <br />
+            <br />
+
+            <button class="btn btn-info">Kaydet</button>
+        </div>
+    }*@
+
+@model EntityLayer.Concrete.Content
+
+<div class="modal-body">
+    @using (Html.BeginForm("NewContent", "WriterPanelContent", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.HeadingID)
+            @Html.HiddenFor(x => x.ContentDate)
+            @Html.HiddenFor(x => x.ContentStatus)
+            @Html.HiddenFor(x => x.WriterID)
+            <div class="form-group row">
+                @Html.Label("Başlık", new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(x => x.ContentValue, 10, 30, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ContentValue)
+                </div>
+            </div>
+            <br />
+            <button class="btn btn-dark">Gönder</button>
+        </div>
+
+
+
+    }
+</div>

@@ -1,0 +1,62 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .padding-100 {
+            padding: 100px;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body >
+    <section class="content padding-100">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kategori İşlemleri</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table ">
+                    <tr>
+                        <th>Kategori Adı</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.CategoryStatus)
+                        {
+                            <tr>
+
+                                <td>@item.CategoryName</td>
+                                <td>
+                                    <a href="/Content/GetListByCategory/@item.CategoryID" class="btn btn-outline-success">
+                                        <i class="fas fa-trash"></i>
+                                        Başlıkları incele
+                                    </a>
+                                    <a href="/AdminCategory/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
+                                        Sil
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+                @Html.Action("AddCategory", "AdminCategory")
+    </section>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+<div class="col-md-2">
+    <!-- /.card -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"></h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus">Kategoriler</i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/WriterPanelContent/AllContents" class="nav-link">
+                        <i class="far fa-circle" style="color:black;"></i>
+                        Hepsi
+
+                    </a>
+                </li>
+                @foreach (var item in Model)
+                {
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="/WriterPanelContent/GetListByCategory/@item.CategoryID" class="nav-link">
+                            <i class="far fa-circle" style="color:@item.CategoryDescription;"></i>
+                            @item.CategoryName
+
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
+

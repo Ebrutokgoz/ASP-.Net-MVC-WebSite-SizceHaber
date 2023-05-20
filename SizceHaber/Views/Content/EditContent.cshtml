@@ -1,0 +1,40 @@
+﻿
+
+
+
+@model EntityLayer.Concrete.Content
+@{
+    ViewBag.Title = "EditContent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section style="padding: 200px; padding-top: 10px;">
+
+    @using (Html.BeginForm("EditContent", "Content", FormMethod.Post))
+    {
+
+        <h3 style="color:orangered; margin:10px;" class="font-weight-bold">
+            @Html.DisplayFor(x => x.Heading.HeadingName)
+        </h3>
+        <br />
+        <h3>Haberi düzenle</h3>
+
+        <div class="form-group">
+            @Html.HiddenFor(x => x.ContentID)
+            @Html.HiddenFor(x => x.ContentDate)
+            @Html.HiddenFor(x => x.ContentStatus)
+            @Html.HiddenFor(x => x.HeadingID)
+            @Html.HiddenFor(x => x.WriterID)
+            <div>
+                <div>
+                    @Html.TextAreaFor(x => x.ContentValue, 10, 10, new { @class = "form-control", @placeholder = "Bence..." })
+                </div>
+            </div>
+
+            <br />
+            <button class="btn btn-dark">Güncelle</button>
+        </div>
+
+
+    }
+
+</section>

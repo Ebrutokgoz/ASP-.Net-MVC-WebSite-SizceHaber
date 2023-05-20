@@ -1,0 +1,37 @@
+﻿@model EntityLayer.Concrete.Admin
+
+
+<button class="btn btn-dark" data-toggle="modal" data-target="#Modal2">
+    Yeni Admin
+</button>
+
+<div class="modal" id="Modal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Yeni bir admin oluştur</h4>
+            </div>
+
+            <div class="modal-body">
+                @using (Html.BeginForm("AddAdmin", "Authorization", FormMethod.Post))
+                {
+                <div class="form-group">
+                    @Html.Label("Admin E-Mail")
+                    @Html.TextBoxFor(x => x.AdminUsername, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.AdminUsername)
+                    <br />
+                    @Html.Label("Şifre")
+                    @Html.TextBoxFor(x => x.AdminPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.AdminPassword)
+                    <br />
+                    @Html.Label("Rol")
+                    @Html.TextBoxFor(x => x.AdminRole, new { @class = "form-control" })
+                    <br /><br />
+                    <button class="btn btn-dark">Kaydet</button>
+                </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

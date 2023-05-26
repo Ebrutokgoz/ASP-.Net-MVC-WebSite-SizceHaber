@@ -112,6 +112,10 @@
     <Compile Include="Migrations\202305201547043_mig_addwriter_rememberme.designer.cs">
       <DependentUpon>202305201547043_mig_addwriter_rememberme.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305252252525_mig_add_admin.cs" />
+    <Compile Include="Migrations\202305252252525_mig_add_admin.designer.cs">
+      <DependentUpon>202305252252525_mig_add_admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305201547043_mig_addwriter_rememberme.resx">
       <DependentUpon>202305201547043_mig_addwriter_rememberme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305252252525_mig_add_admin.resx">
+      <DependentUpon>202305252252525_mig_add_admin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,13 +15,6 @@ namespace SizceHaber.Controllers
         // GET: Authorization
 
         AdminManager adm = new AdminManager(new EfAdminDal());
-        WriterManager wm = new WriterManager(new EfWriterDal());
-        Context c = new Context(); 
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
 
         [Authorize(Roles = "A")]
         public ActionResult Index()
@@ -31,7 +24,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var adminValues = adm.GetList();
             return View(adminValues);
         }
@@ -57,7 +50,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var adminValue = adm.GetByID(id);
             return View(adminValue);
         }

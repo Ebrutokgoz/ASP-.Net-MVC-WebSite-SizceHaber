@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Font-Awesome-Icons-CSS -->
     <!-- /Fonts -->
@@ -57,7 +57,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
                         <h3 class="mb-4 text-center">Hesabın yok mu?</h3>
-                        @using (Html.BeginForm("Index", "WriterRegister", FormMethod.Post))
+                        @using (Html.BeginForm("Index", "Register", FormMethod.Post))
                         {
                             <div class="form-group">
                                 <input type="text" name="WriterName" class="form-control" placeholder="Ad" required>
@@ -84,6 +84,11 @@
                                 </span>
                             </div>
                         }
+                        @if (TempData["Error2"] != null)
+                        {
+                            <script>swal("", "Girilen E-mail Adresine Ait Bir Hesap Zaten Mevcut!", "error");</script>
+                        }
+
                         @*<p class="w-100 text-center">&mdash; Diğer Giriş Seçenekleri &mdash;</p>
         <div class="social d-flex text-center">
             <a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>

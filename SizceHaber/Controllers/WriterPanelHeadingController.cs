@@ -28,11 +28,6 @@ namespace SizceHaber.Controllers
             var categoryList = cm.GetList();
             return PartialView(categoryList);
         }
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
 
         public ActionResult MyHeading(string p, int k = 1)
         {
@@ -76,7 +71,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             List<SelectListItem> valueCategory = (from x in cm.GetList()
                                                   select new SelectListItem
                                                   {
@@ -109,7 +104,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var headings = hm.GetList().ToPagedList(p, 10);
             return View(headings);
         }
@@ -121,7 +116,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var headingsValues = hm.GetListByCategoryID(id).ToPagedList(p, 8);
             return View(headingsValues);
         }

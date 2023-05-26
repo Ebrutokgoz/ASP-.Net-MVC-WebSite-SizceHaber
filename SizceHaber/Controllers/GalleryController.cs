@@ -16,13 +16,7 @@ namespace SizceHaber.Controllers
         // GET: Gallery
 
         ImageFileManager ifm = new ImageFileManager(new EfImageFileDal());
-        WriterManager wm = new WriterManager(new EfWriterDal());
-        Context c = new Context();
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
+      
         public ActionResult Index(int k = 1)
         {
             string mail = (string)Session["WriterMail"];
@@ -30,7 +24,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var files = ifm.GetList().ToPagedList(k, 8);
             return View(files);
         }

@@ -20,11 +20,6 @@ namespace SizceHaber.Controllers
         HeadingManager hm = new HeadingManager(new EfHeadingDal());
         CategoryManager cam = new CategoryManager(new EfCategoryDal());
         Context c = new Context();
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
         public ActionResult Index()
         {
             return View();
@@ -37,7 +32,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contentValues = cm.GetList();
             return View(contentValues);
         }
@@ -49,7 +44,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             if (string.IsNullOrEmpty(p))
             {
                 p = "";
@@ -92,7 +87,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var heading = hm.GetByID(id);
             if (heading.HeadingStatus)
             {
@@ -115,7 +110,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contentValues = cm.GetListByCategoryID(id).ToPagedList(p, 8);
             ViewBag.path = "/Content/GetListByCategory";
             return View(contentValues);
@@ -140,7 +135,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contentValue = cm.GetByID(id);
             return PartialView(contentValue);
         }

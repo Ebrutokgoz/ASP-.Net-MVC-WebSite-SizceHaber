@@ -20,24 +20,21 @@ namespace SizceHaber.Controllers
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
         Context c = new Context();
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
-        public ActionResult Index(string p, int k = 1)
+        
+        public ActionResult Index(string searchedString, int k = 1)
         {
             string mail = (string)Session["WriterMail"];
             if (string.IsNullOrEmpty(mail))
             {
-                return RedirectToAction("Index","Login");
+                return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
-            if (string.IsNullOrEmpty(p))
-            {
-                p = "";
-            }
-            var headingValues = hm.GetList(p).ToPagedList(k, 8);
+            ViewBag.writerName = WriterNameController.GetName(mail);
+
+            //if (string.IsNullOrEmpty(searchedString))
+            //{
+            //    searchedString = "";
+            //}
+            var headingValues = hm.GetList(searchedString).ToPagedList(k, 8);
             return View(headingValues);
         }
 
@@ -48,7 +45,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var headingValues = hm.GetList();
             return View(headingValues);
         }
@@ -117,7 +114,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             hm.HeadingUpdate(p);
             return RedirectToAction("Index");
         }
@@ -136,7 +133,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var headingValues = hm.GetListByCategoryID(id).ToPagedList(k, 8);
             return View(headingValues);
         }
@@ -147,7 +144,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contentValues = hm.GetListByWriter(id).ToPagedList(k, 10);
             return View(contentValues);
         }

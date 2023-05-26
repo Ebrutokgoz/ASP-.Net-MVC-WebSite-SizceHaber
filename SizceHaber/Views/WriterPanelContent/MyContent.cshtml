@@ -6,7 +6,7 @@
     ViewBag.Title = "MyContent";
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
-
+@using SizceHaber.App_Code
 
 <!DOCTYPE html>
 <html>
@@ -60,14 +60,12 @@
                                                     @item.Writer.WriterName @item.Writer.WriterSurname - @(((DateTime)item.ContentDate).ToString("dd.MM.yyyy"))
                                                 </small>
                                             </div>
-
-
-                                            <a class="btn btn-outline-success btn-sm" href="/WriterPanelContent/EditContent/@item.ContentID" style="width:2rem; margin:5px;">
+                                            <a class="btn btn-outline-success btn-sm" href="/duzenle/@item.ContentID/@SEO.EditURL(item.ContentValue)" style="width:2rem; margin:5px;">
                                                 <i class="fas fa-pen">
                                                 </i>
 
                                             </a>
-                                            <a class="btn btn-outline-danger btn-sm" href="/WriterPanelContent/DeleteContent/@item.ContentID" style="width:2rem; margin:5px;">
+                                            <a class="btn btn-outline-danger btn-sm" href="/sil/@item.ContentID/@SEO.EditURL(item.ContentValue)" style="width:2rem; margin:5px;">
                                                 <i class="fas fa-trash">
                                                 </i>
 

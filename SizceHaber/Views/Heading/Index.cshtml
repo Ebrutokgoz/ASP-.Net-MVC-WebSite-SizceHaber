@@ -11,7 +11,7 @@
 @{ string headingStatus = "Pasif";}
 
 <!DOCTYPE html>
-<html>
+<html >
 <head>
     <style>
         .padding-100 {
@@ -24,8 +24,8 @@
     </style>
     <link rel="stylesheet" href="~/Content/PagedList.css">
 </head>
-<body class="hold-transition sidebar-mini">
-
+<body class="hold-transition sidebar-mini" >
+  
 
     <!-- Main content -->
     <section class="content padding-100">
@@ -33,15 +33,15 @@
             @Html.Action("CategoryListMenu", "Heading")
             <div class="col-md-9">
                 <div class="container-fluid">
-                    @using (Html.BeginForm("Index", "Heading", FormMethod.Post))
+                    @*@using (Html.BeginForm("Index", "Heading", FormMethod.Post))
                     {
                         <div class="d-flex" style="margin-bottom:5px;">
-                            @Html.TextBox("p")
+                            @Html.TextBox("searchedString")
                             <button class="btn btn-info btn-sm" type="submit" style="border-radius:2px; margin-left:2px;">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
-                    }
+                    }*@
                     <!-- Default box -->
                     <div class="card">
                         <div class="card-header">

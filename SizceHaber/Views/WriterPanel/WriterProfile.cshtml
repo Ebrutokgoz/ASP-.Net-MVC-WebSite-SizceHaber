@@ -68,7 +68,7 @@
                 </div>
                 <div class="user-image">
                     <img class="img-circle" src="@Html.DisplayTextFor(x => x.WriterImage)" alt="User Avatar">
-
+                    
                 </div>
                 <div class="user-info">
                     <div class="form-group row">
@@ -91,18 +91,11 @@
                         @Html.ValidationMessageFor(x => x.WriterSurname)
                     </div>
 
-                    <div class="form-group row">
-                        @Html.Label("E-mail Adresi", new { @class = "col-sm-2 col-form-label" })
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control", @type = "email" })
-                        </div>
-                        @Html.ValidationMessageFor(x => x.WriterMail)
-                    </div>
 
                     <div class="form-group row">
                         @Html.Label("Şifre", new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-10">
-                            @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control", @type = "password" })
+                            <input id="password-field" name="WriterPassword" type="password" class="form-control" placeholder="Şifre" required>
                         </div>
                         @Html.ValidationMessageFor(x => x.WriterPassword)
                     </div>

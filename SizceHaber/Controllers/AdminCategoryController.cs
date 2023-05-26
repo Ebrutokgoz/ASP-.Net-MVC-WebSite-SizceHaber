@@ -15,13 +15,8 @@ namespace SizceHaber.Controllers
     public class AdminCategoryController : Controller
     {
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
-        WriterManager wm = new WriterManager(new EfWriterDal());
-        Context c = new Context();
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
+      
+        
 
         [Authorize(Roles = "A")]
         public ActionResult Index()
@@ -31,7 +26,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             ViewBag.writerMail = (string)Session["WriterMail"];
             var categoryValues = cm.GetList();
             return View(categoryValues);

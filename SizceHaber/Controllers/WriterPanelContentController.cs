@@ -27,12 +27,6 @@ namespace SizceHaber.Controllers
             return PartialView(categoryList);
         }
 
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
-
         [Route("paylasimlarim")]
         public ActionResult MyContent(string p, int k = 1)
         { 
@@ -56,7 +50,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contentValues = cm.GetList().ToPagedList(p, 10);
             return View(contentValues);
         }
@@ -68,10 +62,11 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var heading = hm.GetByID(id);
             if(heading.HeadingStatus)
             {
+                ViewBag.headingID = heading.HeadingID;
                 ViewBag.headingName = heading.HeadingName;
 
                 ViewBag.headingWriterInfo = heading.Writer.WriterName + " " + heading.Writer.WriterSurname + " - " + (((DateTime)heading.HeadingDate).ToString("dd.MM.yyyy"));
@@ -125,13 +120,15 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contentValues = cm.GetListByCategoryID(id).ToPagedList(p, 8);
             return View(contentValues);
         }
       
 
+        
         [HttpGet]
+        [Route("duzenle/{id}/{baslik}")]
         public ActionResult EditContent(int id)
         {
             string mail = (string)Session["WriterMail"];
@@ -139,18 +136,21 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contentValue = cm.GetByID(id);
             return PartialView(contentValue);
         }
 
         [HttpPost]
+        [Route("duzenle/{id}/{baslik}")]
         public ActionResult EditContent(Content p)
         {
             cm.ContentUpdate(p);
             return RedirectToAction("MyContent");
         }
-        public ActionResult DeleteHeading(int id)
+
+        [Route("sil/{id}/{baslik}")]
+        public ActionResult DeleteContent(int id)
         {
             var contentValue = cm.GetByID(id);
             contentValue.ContentStatus = false;

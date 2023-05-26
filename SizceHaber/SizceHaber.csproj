@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\SEO.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -161,11 +162,12 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WriterController.cs" />
+    <Compile Include="Controllers\WriterNameController.cs" />
     <Compile Include="Controllers\WriterPanelContentController.cs" />
     <Compile Include="Controllers\WriterPanelController.cs" />
     <Compile Include="Controllers\WriterPanelHeadingController.cs" />
     <Compile Include="Controllers\WriterPanelMessageController.cs" />
-    <Compile Include="Controllers\WriterRegisterController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2799,8 +2801,8 @@
     <Content Include="Views\Authorization\EditAdmin.cshtml" />
     <Content Include="Views\Login\SweetAlert.cshtml" />
     <Content Include="Views\Login\AdminLogin.cshtml" />
-    <Content Include="Views\WriterRegister\Index.cshtml" />
-    <Content Include="Views\WriterRegister\Register.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Default\Navbar.cshtml" />
     <Content Include="Views\Default\HeadingList.cshtml" />
     <Content Include="Views\WriterPanelContent\GetListByCategory.cshtml" />
@@ -2838,6 +2840,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="UploadedImages\" />
     <Folder Include="Views\Encryption\" />
+    <Folder Include="Views\WriterName\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

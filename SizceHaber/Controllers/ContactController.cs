@@ -14,13 +14,6 @@ namespace SizceHaber.Controllers
     {
         ContactManager cm = new ContactManager(new EfContactDal());
         ContactValidator cv = new ContactValidator();
-        WriterManager wm = new WriterManager(new EfWriterDal());
-        Context c = new Context();
-        public string GetName(String mail)
-        {
-            var writer = wm.GetByID(c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault());
-            return writer.WriterName + " " + writer.WriterSurname;
-        }
 
         public ActionResult Index()
         {
@@ -29,7 +22,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contactValues = cm.GetList();
             return View(contactValues);
         }
@@ -41,7 +34,7 @@ namespace SizceHaber.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            ViewBag.writerName = GetName(mail);
+            ViewBag.writerName = WriterNameController.GetName(mail);
             var contactValues = cm.GetByID(id);
             return View(contactValues);
         }

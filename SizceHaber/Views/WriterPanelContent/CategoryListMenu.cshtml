@@ -22,13 +22,17 @@
                 </li>
                 @foreach (var item in Model)
                 {
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="/WriterPanelContent/GetListByCategory/@item.CategoryID" class="nav-link">
-                            <i class="far fa-circle" style="color:@item.CategoryDescription;"></i>
-                            @item.CategoryName
+                if (item.CategoryStatus)
+                {
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/WriterPanelContent/GetListByCategory/@item.CategoryID" class="nav-link">
+                    <i class="far fa-circle" style="color:@item.CategoryDescription;"></i>
+                    @item.CategoryName
 
-                        </a>
-                    </li>
+                </a>
+            </li>
+                }
+                    
                 }
             </ul>
         </div>

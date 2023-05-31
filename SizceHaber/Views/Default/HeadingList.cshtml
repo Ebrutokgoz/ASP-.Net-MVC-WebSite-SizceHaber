@@ -49,7 +49,7 @@
                             <!-- timeline time label -->
                             @foreach (var item in Model)
                             {
-                                if (item.ContentStatus == true)
+                                if (item.ContentStatus && item.Heading.HeadingStatus)
                                 {
 
                                     <div class="time-label">

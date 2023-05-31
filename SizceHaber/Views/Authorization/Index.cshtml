@@ -43,21 +43,24 @@
                         {
                             adminRole = "Tam yetki";
                         }
-                        <tr>
-                            <th>@item.AdminID</th>
-                            <td>@item.AdminUsername</td>
-                            <td>@adminRole</td>
-                            @*<td>Aktif</td>
-                            <td><a href="/Authorization/DeleteAdmin/@item.AdminID" class="btn btn-danger">Pasif Yap</a></td>*@
-                            <td><a href="/Authorization/EditAdmin/@item.AdminID" class="btn btn-warning">Yetkisini Değiştir</a></td>
-                        </tr>
+                <tr>
+                    <th>@item.AdminID</th>
+                    <td>@item.AdminUsername</td>
+                    <td>@adminRole</td>
+                    @*<td>Aktif</td>
+        <td><a href="/Authorization/DeleteAdmin/@item.AdminID" class="btn btn-danger">Pasif Yap</a></td>*@
+                    @if (User.IsInRole("A"))
+                    {
+                        <td><a href="/Authorization/EditAdmin/@item.AdminID" class="btn btn-warning">Yetkisini Değiştir</a></td>
+                    }
+                    </tr>
+                        adminRole = "Kısıtlı yetki";
                     }
                 </table>
 
             </div>
 
         </div>
-        @Html.Action("AddAdmin", "Authorization")
     </section>
 </body>
 </html>

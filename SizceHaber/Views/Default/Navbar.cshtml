@@ -24,9 +24,12 @@
             </li>
             @foreach (var item in Model)
             {
+                if (item.CategoryStatus)
+                {
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/Default/ContentListByCategory/@item.CategoryID" class="nav-link">@item.CategoryName</a>
                 </li>
+                }
             }
 
         </ul>

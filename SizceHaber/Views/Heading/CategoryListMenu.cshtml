@@ -23,7 +23,8 @@
                 </li>
                 @foreach (var item in Model)
                 {
-
+                    if (item.CategoryStatus)
+                    {
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="/Heading/GetListByCategory/@item.CategoryID" class="nav-link">
                             <i class="far fa-circle" style="color:@item.CategoryDescription;"></i>
@@ -31,6 +32,7 @@
 
                         </a>
                     </li>
+                    }
                 }
             </ul>
         </div>

@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules_FluentValidation;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using PagedList;
 using PagedList.Mvc;
 using System;
@@ -21,7 +23,7 @@ namespace SizceHaber.Controllers
         WriterManager wm = new WriterManager(new EfWriterDal());
         Context c = new Context();
         
-        public ActionResult Index(string searchedString, int k = 1)
+        public ActionResult Index( int k = 1)
         {
             string mail = (string)Session["WriterMail"];
             if (string.IsNullOrEmpty(mail))
@@ -34,7 +36,7 @@ namespace SizceHaber.Controllers
             //{
             //    searchedString = "";
             //}
-            var headingValues = hm.GetList(searchedString).ToPagedList(k, 8);
+            var headingValues = hm.GetList().OrderByDescending(d => d.HeadingDate).ToPagedList(k, 8);
             return View(headingValues);
         }
 
@@ -60,7 +62,7 @@ namespace SizceHaber.Controllers
                 Select(y => y.WriterID).FirstOrDefault();
             var writer = wm.GetByID(writerId);
             ViewBag.writerName = writer.WriterName + " " + writer.WriterSurname;
-            var contentValues = hm.GetListByWriter(writerId).ToPagedList(k, 10);
+            var contentValues = hm.GetListByWriter(writerId).OrderByDescending(d => d.HeadingDate).ToPagedList(k, 10);
             return View(contentValues);
         }
 
@@ -87,14 +89,37 @@ namespace SizceHaber.Controllers
         [HttpPost]
         public ActionResult AddHeading(Heading p)
         {
-            p.HeadingDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            hm.HeadingAdd(p);
+            HeadingValidator headingValidator = new HeadingValidator();
+            ValidationResult results = headingValidator.Validate(p);
+
+            if (results.IsValid)
+            {
+                p.HeadingStatus = true;
+                p.HeadingDate = DateTime.Now;
+                hm.HeadingAdd(p);
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                TempData["Error"] = "True";
+                
+            }
             return RedirectToAction("Index");
+
         }
 
         [HttpGet]
         public ActionResult EditHeading(int id)
         {
+            string mail = (string)Session["WriterMail"];
+            if (string.IsNullOrEmpty(mail))
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            ViewBag.writerName = WriterNameController.GetName(mail);
             List<SelectListItem> valueCategory = (from x in cm.GetList()
                                                   select new SelectListItem
                                                   {
@@ -134,7 +159,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var headingValues = hm.GetListByCategoryID(id).ToPagedList(k, 8);
+            var headingValues = hm.GetListByCategoryID(id).OrderByDescending(d => d.HeadingDate).ToPagedList(k, 8);
             return View(headingValues);
         }
         public ActionResult GetListByWriter(int id, int k = 1)
@@ -145,7 +170,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var contentValues = hm.GetListByWriter(id).ToPagedList(k, 10);
+            var contentValues = hm.GetListByWriter(id).OrderByDescending(d => d.HeadingDate).ToPagedList(k, 10);
             return View(contentValues);
         }
 

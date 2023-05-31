@@ -23,7 +23,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var contactValues = cm.GetList();
+            var contactValues = cm.GetList().OrderByDescending(d => d.ContactDate);
             return View(contactValues);
         }
 

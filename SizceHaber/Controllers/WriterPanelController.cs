@@ -47,6 +47,7 @@ namespace SizceHaber.Controllers
             ValidationResult results = writerValidator.Validate(p);
             if (results.IsValid)
             {
+                p.WriterPassword = EncryptionController.CreateMD5(p.WriterPassword);
                 wm.WriterUpdate(p);
                 return RedirectToAction("WriterProfile");
             }

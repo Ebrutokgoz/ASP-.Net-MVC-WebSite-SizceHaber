@@ -116,6 +116,26 @@
     <Compile Include="Migrations\202305252252525_mig_add_admin.designer.cs">
       <DependentUpon>202305252252525_mig_add_admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202305261626356_mig-change-heading.cs" />
+    <Compile Include="Migrations\202305261626356_mig-change-heading.designer.cs">
+      <DependentUpon>202305261626356_mig-change-heading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305261816387_mig-change-content.cs" />
+    <Compile Include="Migrations\202305261816387_mig-change-content.designer.cs">
+      <DependentUpon>202305261816387_mig-change-content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305262214570_mig-change-category.cs" />
+    <Compile Include="Migrations\202305262214570_mig-change-category.designer.cs">
+      <DependentUpon>202305262214570_mig-change-category.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305262303007_mig-change-messages.cs" />
+    <Compile Include="Migrations\202305262303007_mig-change-messages.designer.cs">
+      <DependentUpon>202305262303007_mig-change-messages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305312226185_mig-admin-change.cs" />
+    <Compile Include="Migrations\202305312226185_mig-admin-change.designer.cs">
+      <DependentUpon>202305312226185_mig-admin-change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -162,6 +182,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305252252525_mig_add_admin.resx">
       <DependentUpon>202305252252525_mig_add_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305261626356_mig-change-heading.resx">
+      <DependentUpon>202305261626356_mig-change-heading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305261816387_mig-change-content.resx">
+      <DependentUpon>202305261816387_mig-change-content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305262214570_mig-change-category.resx">
+      <DependentUpon>202305262214570_mig-change-category.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305262303007_mig-change-messages.resx">
+      <DependentUpon>202305262303007_mig-change-messages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305312226185_mig-admin-change.resx">
+      <DependentUpon>202305312226185_mig-admin-change.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

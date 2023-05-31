@@ -61,28 +61,10 @@
                             <!-- timeline time label -->
                             @foreach (var item in Model)
                             {
-                                if (item.Heading.CategoryID == 1)
-                                {
-                                    color = "#99A3A4";
-                                }
-                                else if (item.Heading.CategoryID == 2)
-                                {
-                                    color = "#CD6155 ";
-                                }
-                                else if (item.Heading.CategoryID == 3)
-                                {
-                                    color = "#A569BD";
-                                }
-                                else if (item.Heading.CategoryID == 4)
-                                {
-                                    color = "#5DADE2";
-                                }
-                                else
-                                {
-                                    color = "#27AE60";
-                                }
+                                if (item.Heading.HeadingStatus && item.ContentStatus)
+                                { 
                                 <div class="time-label">
-                                    <span style="background-color:@color; width:10rem; text-align:center;"><a style="color:black;" href="/Default/ContentListByCategory/@item.Heading.CategoryID">@item.Heading.Category.CategoryName</a></span>
+                                    <span style="background-color:@item.Heading.Category.CategoryDescription; width:10rem; text-align:center;"><a style="color:black;" href="/Default/ContentListByCategory/@item.Heading.CategoryID">@item.Heading.Category.CategoryName</a></span>
                                 </div>
                                 <!-- /.timeline-label -->
                                 <!-- timeline item -->
@@ -105,7 +87,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                }
                             }
 
                             <!-- END timeline item -->

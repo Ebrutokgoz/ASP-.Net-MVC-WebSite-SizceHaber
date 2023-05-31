@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string color = "white";
 }
 
 <!DOCTYPE html>
@@ -14,9 +15,13 @@
             padding: 100px;
             padding-top: 10px;
         }
+
+        .categoryName {
+            font-size: 20px;
+        }
     </style>
 </head>
-<body >
+<body>
     <section class="content padding-100">
         <div class="card">
             <div class="card-header">
@@ -38,11 +43,21 @@
                         if (item.CategoryStatus)
                         {
                             <tr>
+                                <td>
+                                    @if (item.CategoryDescription == null)
+                                    {
+                                        color = "white";
+                                    }
+                                    else
+                                    {
 
-                                <td>@item.CategoryName</td>
+                                        color = item.CategoryDescription;
+                                    }
+                                    <div class="badge categoryName" style="background-color: @color">@item.CategoryName</div>
+                                </td>
                                 <td>
                                     <a href="/Content/GetListByCategory/@item.CategoryID" class="btn btn-outline-success">
-                                        <i class="fas fa-trash"></i>
+                                        <i class="far fa-eye"></i>
                                         Başlıkları incele
                                     </a>
                                     <a href="/AdminCategory/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger">
@@ -56,7 +71,7 @@
                 </table>
             </div>
         </div>
-                @Html.Action("AddCategory", "AdminCategory")
+        @Html.Action("AddCategory", "AdminCategory")
     </section>
 </body>
 </html>

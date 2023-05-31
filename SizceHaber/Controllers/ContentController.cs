@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules_FluentValidation;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using PagedList;
 using PagedList.Mvc;
 using System;
@@ -49,8 +51,7 @@ namespace SizceHaber.Controllers
             {
                 p = "";
             }
-            var values = cm.GetList(p).ToPagedList(k, 8);
-            ViewBag.path = "/Content/GetListByCategory";
+            var values = cm.GetList(p).OrderByDescending(d => d.ContentDate).ToPagedList(k, 8);
             return View(values);
 
             //var values = from x in c.Contents select x;
@@ -64,11 +65,28 @@ namespace SizceHaber.Controllers
         {
             string mail = (string)Session["WriterMail"];
             var writerId = c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault();
-            p.ContentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            p.WriterID = writerId;
-            p.ContentStatus = true;
-            cm.ContentAdd(p);
+
+            ContentValidator contentValidator = new ContentValidator();
+            ValidationResult results = contentValidator.Validate(p);
+
+            if (results.IsValid)
+            {
+                p.ContentDate = DateTime.Now;
+                p.WriterID = writerId;
+                p.ContentStatus = true;
+                cm.ContentAdd(p);
+                
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+
             return Redirect(Request.UrlReferrer.ToString());
+
         }
         public ActionResult MyContent(string p, int k = 1)
         {
@@ -77,7 +95,7 @@ namespace SizceHaber.Controllers
                 Select(y => y.WriterID).FirstOrDefault();
             var writer = wm.GetByID(writerId);
             ViewBag.writerName = writer.WriterName + " " + writer.WriterSurname;
-            var contentValues = cm.GetListByWriter(writerId).ToPagedList(k, 10);
+            var contentValues = cm.GetListByWriter(writerId).OrderByDescending(d => d.ContentDate).ToPagedList(k, 10);
             return View(contentValues);
         }
         public ActionResult ContentByHeading(int id, int p = 1)
@@ -92,10 +110,9 @@ namespace SizceHaber.Controllers
             if (heading.HeadingStatus)
             {
                 ViewBag.headingName = heading.HeadingName;
-
                 ViewBag.headingWriterInfo = heading.Writer.WriterName + " " + heading.Writer.WriterSurname + " - " + (((DateTime)heading.HeadingDate).ToString("dd.MM.yyyy"));
-
-                var contentValues = cm.GetListByHeadingID(id).ToPagedList(p, 8);
+                ViewBag.headingID = heading.HeadingID;
+                var contentValues = cm.GetListByHeadingID(id).OrderByDescending(d => d.ContentDate).ToPagedList(p, 8);
                 return View(contentValues);
             }
             else
@@ -111,7 +128,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var contentValues = cm.GetListByCategoryID(id).ToPagedList(p, 8);
+            var contentValues = cm.GetListByCategoryID(id).OrderByDescending(d => d.ContentDate).ToPagedList(p, 8);
             ViewBag.path = "/Content/GetListByCategory";
             return View(contentValues);
         }

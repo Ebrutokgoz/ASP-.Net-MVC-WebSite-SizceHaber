@@ -28,19 +28,19 @@ namespace SizceHaber.Controllers
             var adminValues = adm.GetList();
             return View(adminValues);
         }
-        [Authorize(Roles = "A")]
-        [HttpGet]
-        public PartialViewResult AddAdmin()
-        {
-            return PartialView();
-        }
+        //[Authorize(Roles = "A")]
+        //[HttpGet]
+        //public PartialViewResult AddAdmin()
+        //{
+        //    return PartialView();
+        //}
 
-        [HttpPost]
-        public ActionResult AddAdmin(Admin p)
-        {
-            adm.AdminAdd(p);
-            return RedirectToAction("Index");
-        }
+        //[HttpPost]
+        //public ActionResult AddAdmin(Admin p)
+        //{
+        //    adm.AdminAdd(p);
+        //    return RedirectToAction("Index");
+        //}
         [Authorize(Roles = "A")]
         [HttpGet]
         public ActionResult EditAdmin(int id)

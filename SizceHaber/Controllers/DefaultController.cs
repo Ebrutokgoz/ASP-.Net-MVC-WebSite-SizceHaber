@@ -21,18 +21,20 @@ namespace SizceHaber.Controllers
 
         public ActionResult Headings(int p = 1)
         {
-            var headingList = hm.GetList().ToPagedList(p, 20);
+            var headingList = hm.GetList().OrderByDescending(d => d.HeadingDate).ToPagedList(p, 20);
             return View(headingList);
         }
-        public PartialViewResult Sidebar()
+        public PartialViewResult Sidebar(int p = 1)
         {
+
             var headingList = hm.GetList();
+              
             return PartialView(headingList);
         }
 
         public PartialViewResult HeadingList(int id = 2, int p = 1)
         {
-            var headingList = cm.GetListByHeadingID(id).ToPagedList(p, 8);
+            var headingList = cm.GetListByHeadingID(id).OrderByDescending(d => d.ContentDate).ToPagedList(p, 8);
             ViewBag.heading = hm.GetByID(id).HeadingName;
             ViewBag.writerName = hm.GetByID(id).Writer.WriterName;
             ViewBag.writerSurname = hm.GetByID(id).Writer.WriterSurname;
@@ -41,17 +43,17 @@ namespace SizceHaber.Controllers
         }
         public PartialViewResult ContentListByCategory(int id = 2 , int p = 1)
         {
-            var contentList = cm.GetListByCategoryID(id).ToPagedList(p, 8);
+            var contentList = cm.GetListByCategoryID(id).OrderByDescending(d => d.ContentDate).ToPagedList(p, 8);
             return PartialView(contentList);
         }
         public ActionResult HeadingListByCategory(int id)
         {
-            var headingValues = hm.GetListByCategoryID(id);
+            var headingValues = hm.GetListByCategoryID(id).OrderByDescending(d => d.HeadingDate);
             return View(headingValues);
         }
         public PartialViewResult ContentList(int p = 1)
         {
-            var contentList = cm.GetList().ToPagedList(p, 8);
+            var contentList = cm.GetList().OrderByDescending(d => d.ContentDate).ToPagedList(p, 8);
             return PartialView(contentList);
         }
         public ActionResult Navbar()

@@ -28,7 +28,7 @@
                     @Html.ValidationMessageFor(x => x.WriterMail)
                     <br />
                     @Html.Label("Şifre")
-                    @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.WriterPassword, new { @class = "form-control", @type = "password" })
                     @Html.ValidationMessageFor(x => x.WriterPassword)
                     <br />
                     @*@Html.Label("Yazar Görsel Linki")

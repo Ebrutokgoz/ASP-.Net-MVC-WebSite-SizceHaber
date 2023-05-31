@@ -7,7 +7,6 @@
     ViewBag.Title = "ContentByHeading";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@{ int id = 1;}
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +30,24 @@
                         <div style="text-align:center!important;"><h2 style="color:orangered; font-weight:bold;">@ViewBag.headingName</h2> <p style="margin-inline-start: 5px !important; font-size: 15px;">@ViewBag.headingWriterInfo</p></div>
                         <!-- The time line -->
                         <div class="timeline">
+                            <div>
+                                <i class="fas fa-comment bg-yellow"></i>
+                                <div class="timeline-item">
+                                    <h3 class="timeline-header"> </h3>
+                                    <div class="timeline-body">
+                                        <form method="post" action="/Content/NewContent">
+                                            <div>
+                                                <textarea name="ContentValue" class="form-control" placeholder="Bence..."></textarea>
+                                                @*<input type="text" name="ContentValue" class="form-control" placeholder="Bence..." />*@
+                                                <br />
+                                                <input type="hidden" name="HeadingID" class="form-control" value="@ViewBag.headingID" />
+
+                                                <button class="btn btn-dark">Gönder</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- timeline time label -->
                             @foreach (var item in Model)
                             {
@@ -54,29 +71,9 @@
                                         </div>
                                     </div>
                                 }
-                                id = @item.HeadingID;
-
-
 
                             }
-                            <div>
-                                <i class="fas fa-comment bg-yellow"></i>
-                                <div class="timeline-item">
-                                    <h3 class="timeline-header"> </h3>
-                                    <div class="timeline-body">
-                                        <form method="post" action="/Content/NewContent">
-                                            <div>
 
-                                                <input type="text" name="ContentValue" class="form-control" placeholder="Bence..." />
-                                                <br />
-                                                <input type="hidden" name="HeadingID" class="form-control" value="@id" />
-
-                                                <button class="btn btn-dark">Gönder</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
 
 
                             <!-- END timeline item -->

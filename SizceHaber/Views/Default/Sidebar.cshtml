@@ -40,13 +40,17 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     @foreach (var item in Model)
                     {
-                        <li class="nav-item">
-                            <a href="/Default/HeadingList/@item.HeadingID" class="nav-link">
-                                <p class="text-wrap">
-                                    @item.HeadingName
-                                </p>
-                            </a>
-                        </li>
+                        if (item.HeadingStatus)
+                        {
+                            <li class="nav-item">
+                                <a href="/Default/HeadingList/@item.HeadingID" class="nav-link">
+                                    <p class="text-wrap">
+                                        @item.HeadingName
+                                    </p>
+                                </a>
+                            </li>
+                        }
+
                     }
 
                 </ul>
@@ -57,3 +61,4 @@
     </aside>
     <!-- Content Wrapper. Contains page content -->
     <
+</div>

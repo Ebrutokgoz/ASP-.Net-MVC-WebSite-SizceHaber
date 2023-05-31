@@ -13,7 +13,7 @@ namespace EntityLayer.Concrete
         public int CategoryID { get; set; }
         [StringLength(50)]
         public string CategoryName { get; set; }
-        [StringLength(200)]
+        [StringLength(50)]
         public string CategoryDescription { get; set; }
         //Bool olduğu için extra bir kısıtlamaya gerek yok
         public bool CategoryStatus { get; set; } //True or false

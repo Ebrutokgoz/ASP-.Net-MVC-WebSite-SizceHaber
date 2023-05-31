@@ -54,7 +54,7 @@ namespace SizceHaber.Controllers
             {
                 p.CategoryStatus = true;
                 cm.CategoryAdd(p);
-                return RedirectToAction("Index");
+               
             }
             else
             {
@@ -63,7 +63,7 @@ namespace SizceHaber.Controllers
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
-            return View();
+            return RedirectToAction("Index");
         }
         public PartialViewResult AddCategory()
         {

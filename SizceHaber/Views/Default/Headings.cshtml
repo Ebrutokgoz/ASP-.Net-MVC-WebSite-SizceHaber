@@ -5,7 +5,6 @@
 @{
     Layout = null;
 }
-@{ string color = "";}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +29,8 @@
             box-shadow: 0 0 0 #ccc;
             transition: box-shadow .5s;
             margin: 10px;
+            height: 22rem;
+            width: auto;
         }
 
             .title:hover {
@@ -77,33 +78,12 @@ to get the desired effect
                 <div class="row">
                     @foreach (var item in Model)
                     {
-
-                        if (item.CategoryID == 1)
-                        {
-                            color = "#99A3A4";
-                        }
-                        else if (item.CategoryID == 2)
-                        {
-                            color = "#CD6155 ";
-                        }
-                        else if (item.CategoryID == 3)
-                        {
-                            color = "#A569BD";
-                        }
-                        else if (item.CategoryID == 4)
-                        {
-                            color = "#5DADE2";
-                        }
-                        else
-                        {
-                            color = "#27AE60";
-                        }
                         if (item.HeadingStatus)
                         {
-                            <div class="col-lg-3 col-6 ">
+                            <div class="col-lg-3 ">
                                 <!-- small box -->
 
-                                <div class="small-box title" style="background-color: @color;">
+                                <div class="small-box title" style="background-color: @item.Category.CategoryDescription;">
                                     <div class="inner">
 
                                         <h5>@item.HeadingName</h5>

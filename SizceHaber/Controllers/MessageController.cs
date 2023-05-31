@@ -19,7 +19,7 @@ namespace SizceHaber.Controllers
         MessageManager mm = new MessageManager(new EfMessageDal());
         MessageValidator messageValidator = new MessageValidator();
 
-        public ActionResult Inbox(string p)
+        public ActionResult Inbox()
         {
             string mail = (string)Session["WriterMail"];
             if (string.IsNullOrEmpty(mail))
@@ -27,7 +27,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var messageList = mm.GetListInbox(p);
+            var messageList = mm.GetListInbox(mail).OrderByDescending(d => d.MessageDate);
             return View(messageList);
         }
        
@@ -39,7 +39,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var messageList = mm.GetListSendbox(p);
+            var messageList = mm.GetListSendbox(mail).OrderByDescending(d => d.MessageDate);
             return View(messageList);
         }
 
@@ -59,10 +59,13 @@ namespace SizceHaber.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message p)
         {
+            string mail = (string)Session["WriterMail"];
             ValidationResult results = messageValidator.Validate(p);
             if (results.IsValid)
             {
-                p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                p.MessageStatus = true;
+                p.SenderMail = mail;
+                p.MessageDate = DateTime.Now;
                 mm.MessageAdd(p);
                 return RedirectToAction("Sendbox");
             }

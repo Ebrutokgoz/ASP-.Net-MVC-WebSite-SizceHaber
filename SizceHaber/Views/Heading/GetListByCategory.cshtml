@@ -8,7 +8,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@{ string headingStatus = "Pasif";}
+@{ string headingStatus = "Pasif";
+   string color = "red";}
 
 <!DOCTYPE html>
 <html>
@@ -58,10 +59,10 @@
                                             Oluşturan Yazar
                                         </th>
                                         <th style="width: 10%" class="text-center">
-                                            Durum
+                                            Kategori
                                         </th>
                                         <th style="width: 8%" class="text-center">
-                                            Kategori
+                                            Durum
                                         </th>
                                         <th style="width: 30%">
                                         </th>
@@ -73,43 +74,52 @@
                                         if (item.HeadingStatus)
                                         {
                                             headingStatus = "Aktif";
+                                            color = "green";
                                         }
-                                        <tr>
+                                    <tr>
 
-                                            <td>
-                                                <a href="/Content/ContentByHeading/@item.HeadingID" style="color:orangered; font-weight:bold;">
-                                                    @item.HeadingName
-                                                </a>
-                                                <br />
-                                                <small>
-                                                    @(((DateTime)item.HeadingDate).ToString("dd.MM.yyyy"))
-                                                </small>
-                                            </td>
-                                            <td class="text-center">
-                                                @item.Writer.WriterName @item.Writer.WriterSurname
+                                        <td>
+                                            <a href="/Content/ContentByHeading/@item.HeadingID" style="color:orangered; font-weight:bold;">
+                                                @item.HeadingName
+                                            </a>
+                                            <br />
+                                            <small>
+                                                @(((DateTime)item.HeadingDate).ToString("dd.MM.yyyy"))
+                                            </small>
+                                        </td>
+                                        <td class="text-center">
+                                            @item.Writer.WriterName @item.Writer.WriterSurname
 
-                                            </td>
-                                            <td class="text-center">
+                                        </td>
+                                        <td class="text-center">
+                                            @item.Category.CategoryName
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="badge" style="background-color: @color;
+                                                                            color:white;
+                                                                            font-size: 20px;
+                                                                            font-weight: normal">
                                                 @headingStatus
+                                            </div>
 
-                                            </td>
-                                            <td class="text-center">
-                                                @item.Category.CategoryName
-                                            </td>
-                                            <td class="project-actions text-right">
 
-                                                <a class="btn btn-outline-success btn-sm custom-button" href="/Heading/EditHeading/@item.HeadingID">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Düzenle
-                                                </a>
-                                                <a class="btn btn-outline-danger btn-sm custom-button" href="/Heading/DeleteHeading/@item.HeadingID">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                    Sil
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        </td>
+                                        <td class="project-actions text-right">
+
+                                            <a class="btn btn-outline-success btn-sm custom-button" href="/Heading/EditHeading/@item.HeadingID">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Düzenle
+                                            </a>
+                                            <a class="btn btn-outline-danger btn-sm custom-button" href="/Heading/DeleteHeading/@item.HeadingID">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Sil
+                                            </a>
+                                        </td>
+                                    </tr>
+                                        headingStatus = "Pasif";
+                                        color = "red";
                                     }
                                 </tbody>
                             </table>

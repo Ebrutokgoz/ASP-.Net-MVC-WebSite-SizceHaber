@@ -16,6 +16,7 @@ namespace SizceHaber.Controllers
 {
     public class WriterController : Controller
     {
+        string password = "";
         WriterManager wm = new WriterManager(new EfWriterDal());
         WriterValidator writerValidator = new WriterValidator();
         [Authorize(Roles = "A")]
@@ -27,7 +28,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var writerValues = wm.GetList().ToPagedList(k, 20);
+            var writerValues = wm.GetList().OrderBy(d => d.WriterName).ToPagedList(k, 20);
             return View(writerValues);
         }
         public ActionResult WriterReport()
@@ -56,8 +57,10 @@ namespace SizceHaber.Controllers
             ValidationResult results = writerValidator.Validate(p);
             if (results.IsValid)
             {
+                p.WriterStatus = true;
+                p.WriterPassword = EncryptionController.CreateMD5(p.WriterPassword);
                 wm.WriterAdd(p);
-                return RedirectToAction("Index");
+               
             }
             else
             {
@@ -66,7 +69,7 @@ namespace SizceHaber.Controllers
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "A")]
@@ -80,17 +83,20 @@ namespace SizceHaber.Controllers
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
             var writerValue = wm.GetByID(id);
+            password = writerValue.WriterPassword;
             return View(writerValue);
         }
 
         [HttpPost]
         public ActionResult EditWriter(Writer p)
         {
+            
             ValidationResult results = writerValidator.Validate(p);
             if (results.IsValid)
             {
+                p.WriterPassword = EncryptionController.CreateMD5(p.WriterPassword);
                 wm.WriterUpdate(p);
-                return Redirect(Request.UrlReferrer.ToString());
+                
             }
             else
             {
@@ -99,13 +105,12 @@ namespace SizceHaber.Controllers
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
             }
-            return View();
+            return Redirect(Request.UrlReferrer.ToString());
         }
         [Authorize(Roles = "A")]
         public ActionResult DeleteWriter(int id)
         {
             var writerValue = wm.GetByID(id);
-            writerValue.WriterStatus = false;
             wm.WriterDelete(writerValue);
             return RedirectToAction("Index");
         }

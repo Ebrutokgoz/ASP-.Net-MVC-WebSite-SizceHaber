@@ -49,15 +49,15 @@
                                     @foreach (var item in Model)
                                     {
 
-                                        if (item.Heading.HeadingStatus)
+                                        if (item.Heading.HeadingStatus && item.ContentStatus)
                                         {
+                                           
                                             <div class="time-label">
                                                 <span style="background-color:@item.Heading.Category.CategoryDescription; width:10rem; text-align:center;"><a style="color:black;" href="/WriterPanelContent/GetListByCategory/@item.Heading.CategoryID">@item.Heading.Category.CategoryName</a></span>
                                             </div>
                                             <!-- /.timeline-label -->
                                             <!-- timeline item -->
-                                            if (item.ContentStatus)
-                                            {
+                                           
                                                 <div>
                                                     <i class="fas fa-comment bg-yellow"></i>
                                                     <div class="timeline-item">
@@ -80,10 +80,6 @@
                                             }
                                         }
 
-
-
-
-                                    }
 
 
                                     <!-- END timeline item -->

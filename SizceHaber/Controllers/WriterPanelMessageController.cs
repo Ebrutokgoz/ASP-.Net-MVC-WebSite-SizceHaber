@@ -26,7 +26,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var messageList = mm.GetListInbox(mail);
+            var messageList = mm.GetListInbox(mail).OrderByDescending(d => d.MessageDate);
             return View(messageList);
         }
         public ActionResult Sendbox()
@@ -37,7 +37,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var messageList = mm.GetListSendbox(mail);
+            var messageList = mm.GetListSendbox(mail).OrderByDescending(d => d.MessageDate);
             return View(messageList);
         }
 
@@ -87,7 +87,7 @@ namespace SizceHaber.Controllers
             if (results.IsValid)
             {
                 p.SenderMail = sender;
-                p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                p.MessageDate = DateTime.Now;
                 mm.MessageAdd(p);
                 return RedirectToAction("Sendbox");
             }

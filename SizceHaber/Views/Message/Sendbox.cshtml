@@ -67,29 +67,35 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                <div class="icheck-primary">
-                                                    <input type="checkbox" value="" id="check1">
-                                                    <label for="check1"></label>
-                                                </div>
-                                            </td>
-                                            <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="/Message/GetSendboxMessageDetails/@item.MessageID">@item.ReceiverMail</a></td>
-                                            <td class="mailbox-subject">
-                                                <b>@item.Subject</b> -
-                                                @if (item.MessageContent.Length < 30)
-                                                {
-                                                    @item.MessageContent
-                                                }
-                                                else
-                                                {
-                                                    @item.MessageContent.Substring(0, 30)
-                                                }...
-                                            </td>
-                                            <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">@(((DateTime)item.MessageDate).ToString("dd MMM yyyy"))</td>
-                                        </tr>
+                                        if (item.MessageStatus)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="icheck-primary">
+                                                        <input type="checkbox" value="" id="check1">
+                                                        <label for="check1"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+                                                <td class="mailbox-name">@item.ReceiverMail</td>
+                                                <td class="mailbox-subject">
+                                                    <a href="/Message/GetSendboxMessageDetails/@item.MessageID">
+                                                        <b>@item.Subject</b> -
+                                                        @if (item.MessageContent.Length < 30)
+                                                        {
+                                                            @item.MessageContent
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.MessageContent.Substring(0, 30)
+                                                        }...
+                                                    </a>
+                                                </td>
+                                                <td class="mailbox-attachment"></td>
+                                                <td class="mailbox-date">@(((DateTime)item.MessageDate).ToString("dd MMM yyyy"))</td>
+                                            </tr>
+                                        }
+
                                     }
 
                                 </tbody>

@@ -25,7 +25,7 @@ namespace SizceHaber.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.writerName = WriterNameController.GetName(mail);
-            var files = ifm.GetList().ToPagedList(k, 8);
+            var files = ifm.GetList().ToPagedList(k, 30);
             return View(files);
         }
     }

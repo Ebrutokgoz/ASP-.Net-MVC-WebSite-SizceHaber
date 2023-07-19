@@ -2167,7 +2167,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -2191,6 +2190,7 @@
     <Content Include="images\writerpanelheading.png" />
     <Content Include="images\writerprofile.png" />
     <Content Include="images\yetki.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="AdminLTE-3.0.4\.babelrc" />
@@ -2743,6 +2743,8 @@
     <Content Include="AdminLTE-3.0.4\Login_v18\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="AdminLTE-3.0.4\Login_v18\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="AdminLTE-3.0.4\Login_v18\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="libman.json" />
+    <None Include="Properties\PublishProfiles\SizceHaber - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

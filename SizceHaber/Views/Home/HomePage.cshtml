@@ -61,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <nav class="main-header d-flex">
             <div id="brand" style="margin-top:10px; margin-bottom:10px;">
 
-                <a href="/Home/HomePage" class="d-flex align-content-center">
+                <a href="#home" class="d-flex align-content-center">
                     <img class="align-self-center" src="~/AdminLTE-3.0.4/Login_v18/images/letter-s.png" style="background-color: whitesmoke; border-radius:50%; width: 70px; height: 70px; padding:4px;">
                     <span class="text-light font-weight-bold align-self-center siteName" style="margin-left:10px!important;">SİZCE</span> <span class="brand-text font-weight-light text-light align-self-center siteName">&nbsp;Haber</span>
                 </a>
@@ -78,9 +78,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </div>
                 <ul class="text-center nav-honey">
-                    <li>
-                        <a href="/Home/HomePage">Anasayfa</a>
-                    </li>
+                    @*<li>
+                        <a href="#home">Anasayfa</a>
+                    </li>*@
                     <li>
                         <a class="scroll" href="#projects">Görseller</a>
                     </li>
@@ -94,7 +94,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li>
                         <a class="scroll" href="#contact">İletişim</a>
                     </li>
-                    <li>
+                    @*<li>
                         <a href="/Default/Headings/2">SİZCE Haber</a>
                     </li>
                     <li class="login">
@@ -102,7 +102,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             Giriş Yap
                         </button>
 
-                    </li>
+                    </li>*@
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -557,7 +557,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <div class="testimonials_grid-inn text-uppercase">
                                 <i class="fas fa-quote-left"></i>
                                 <p>
-                                    Hosting için Azure'un sağladığı servisleri kullandım.
+                                    İlk önce lokalde ve MSSQL veritabanı yönetim sistemini kullanarak hazırladığım bu siteyi sonradan Azure'a taşıdım.
+                                    Azure'un Web App servisini kullanarak veritabanını Azure'a taşımış oldum ve web sitem için "https://sizcehaber.azurewebsites.net/" alan adına sahip oldum.
                                 </p>
                             </div>
 
@@ -568,7 +569,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <div class="testimonials_grid-inn text-uppercase">
                                 <i class="fas fa-quote-left"></i>
                                 <p>
-                                    Bu proje sayesinde çok katmanlı mimari kullanımında ve C# dilinde kendimi oldukça iletlettim. Hiç kullanma deneyimim olmayan Azure dünyasına adım attım.
+                                    Bu proje sayesinde çok katmanlı mimari kullanımında ve C# dilinde kendimi oldukça iletlettim. Hiç deneyimim olmayan Azure dünyasına adım attım.
                                 </p>
                             </div>
 
@@ -649,7 +650,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <h6 class="my-3">Email</h6>
                                 <p>
                                     Email :
-                                    <a href="mailto:example@email.com"> x-ebru@sizcehaber.com</a>
+                                    <a href="mailto:example@email.com"> ebru.tokgoz@istanbulticaret.edu.tr</a>
 
                                 </p>
                             </div>
@@ -659,11 +660,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="col-md-4 address-grid" data-aos="flip-up">
                         <div class="address-info">
                             <div class="address-left text-center">
-                                <i class="fas fa-mobile-alt"></i>
+                                <i class="fas fa-github"></i>
                             </div>
                             <div class="address-right text-center">
-                                <h6 class="my-3">Phone</h6>
-                                <p>-</p>
+                                <h6 class="my-3">Github</h6>
+                                <p>https://github.com/Ebrutokgoz</p>
 
                             </div>
 
@@ -678,7 +679,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!--/footer-->
     <footer class="footer text-left">
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12053.219600317858!2d29.1196104!3d40.952899!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac68bbc2a2aa7%3A0x419102a05b857d03!2zxLBzdGFuYnVsIFRpY2FyZXQgw5xuaXZlcnNpdGVzaSBLw7zDp8O8a3lhbMSxIEthbXDDvHPDvA!5e0!3m2!1str!2str!4v1683831135515!5m2!1str!2str"
-                width="1660" height="450" style="border: 0; margin:100px; border-radius:30px"
+                width="1660" height="450" style="border: 0; margin:100px; border-radius:30px; margin-bottom:50px;"
                 allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         <div class="container py-4 py-sm-5">
@@ -692,23 +693,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </a>
                         </li>
                         <li class="my-2">
+                            <a href="#projects" class="nav-link scroll">
+                                Görseller
+                            </a>
+                        </li>
+                        <li class="my-2">
                             <a href="#about" class="nav-link scroll">
                                 Geliştirme Araçları
                             </a>
                         </li>
-                        <li class="my-2">
-                            <a href="#services" class="nav-link scroll">
-                                Görseller
-                            </a>
-                        </li>
                         <li class="mb-2">
-                            <a href="#projects" class="nav-link scroll">
-                                İletişim
+                            <a href="#services" class="nav-link scroll">
+                                Hakkında
                             </a>
                         </li>
                         <li>
                             <a href="#contact" class="nav-link scroll">
-                                Contact Us
+                                İletişim
                             </a>
                         </li>
                     </ul>
@@ -716,30 +717,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="col-lg-2 col-md-4 col-sm-6 mt-sm-5">
                     <ul class="list-footer" data-aos="fade-up">
                         <li>
-                            <a href="#register" data-toggle="modal" data-target="#exampleModalCenter" class="nav-link scroll">
+                            <a href="/Default/Headings/2"  class="nav-link ">
+                                Sizce Haber
+                            </a>
+                        </li>
+                        <li class="my-2">
+                            <a href="/Login/Index"  class="nav-link">
                                 Giriş Yap
-                            </a>
-                        </li>
-                        <li class="my-2">
-                            <a href="#" data-toggle="modal" data-target="#exampleModalCenter2" class="nav-link">
-                                Kayıt Ol
-                            </a>
-                        </li>
-                        <li class="my-2">
-                            <a href="#" class="nav-link">
-                                License
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="offset-lg-4"></div>
-                <div class="col-lg-4 footer-end-grid mt-md-0 mt-sm-5" data-aos="fade-up">
-                    <h2>
-                        <a href="index.html">
-                            <i class="fas fa-crosshairs"></i> SİZCE Haber
-                        </a>
-                    </h2>
-                </div>
             </div>
             <hr>
             <div class="d-flex justify-content-between pt-lg-3  footer-bottom-cpy">
@@ -749,30 +738,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <a href="http://w3layouts.com/"> W3layouts </a>
 
                     </p>
-                </div>
-                <div class="social-content pb-md-0 pb-4">
-                    <ul class="social-icons text-center d-flex">
-                        <li class="ml-lg-5">
-                            <a href="#">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-google-plus-g"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

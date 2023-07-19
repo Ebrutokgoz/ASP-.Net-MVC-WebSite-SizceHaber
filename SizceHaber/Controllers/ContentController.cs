@@ -161,7 +161,7 @@ namespace SizceHaber.Controllers
         public ActionResult EditContent(Content p)
         {
             cm.ContentUpdate(p);
-            return RedirectToAction("MyContent");
+            return RedirectToAction("GetAllContent");
         }
     }
 }

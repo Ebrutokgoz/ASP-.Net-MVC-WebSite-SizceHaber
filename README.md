@@ -10,7 +10,8 @@ the other hand, is a design pattern based on three basic components: "Model", "V
 architectural pattern into the layered structuring in the n-tier architectural pattern. This
 design includes four physical layers as “Business Layer”, “Data Access Layer”, “Entity
 Layer” and “Presentation Layer”.
-The project is prepared as "ASP.NET Web Application" in .Net Framework, a platform
+
+The project was builted as "ASP.NET Web Application" in .Net Framework, a platform
 offered by Microsoft and used to develop applications running on Windows operating
 systems. ASP.NET is used to create web-based applications that run on the browser.
 During the development, Entity Framework, an ORM (Object to Relational Mapping)
@@ -20,6 +21,9 @@ database to be done easily with object oriented programming. Here, Entity Framew
 in the Visual Studio environment instead of being prepared in a database management
 system. This method increases the flexibility of the project as it makes the project
 independent in the database.
+
 The project was developed in Microsoft Visual Studio with the C# programming
 language. HTML5, JavaScript and CSS languages are used for the front-end design of the
-website.
+website. During development, it was avoided to create complex codes by following the SOLID principles.
+
+The hosting service of the project was provided from Azure. With Azure Web App Service and Azure Database Service, the site was published and the data was moved to Azure. Thus, the website can be accessed from outside the local server with the domain name sizehaber.azurewebsites.net.
